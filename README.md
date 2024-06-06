@@ -27,7 +27,7 @@ import { Quaternion } from '@xloxlolex/quaternion-math';
 ### Import
 
 ```typescript
-import { Vector2 } from '@xloxlolex/vector-math';
+import { Quaternion } from '@xloxlolex/quaternion-math';
 ```
 
 ### Constructor
@@ -44,7 +44,7 @@ Quaternion(x?: number, y?: number, z?: number, w?: number);
 Quaternion.identity; // Quaternion(0, 0, 0, 1).
 ```
 
-### Static Methods (Vector2)
+### Static Methods
 
 ```typescript
 // Create a Quaternion from Euler angles.
