@@ -1,6 +1,6 @@
 {
     "name": "@xloxlolex/quaternion-math",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Fast and easy-to-use Quaternion Math library powered by TypeScript",
     "main": "dist/index.js",
     "types": "dist/index.d.js",
