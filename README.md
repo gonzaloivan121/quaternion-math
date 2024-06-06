@@ -16,13 +16,7 @@ Install @xloxlolex/quaternion-math with npm
   cd my-project
   npm install @xloxlolex/quaternion-math
 ```
-    
-## Import
-```typescript
-import { Quaternion } from '@xloxlolex/quaternion-math';
-```
-
-## Usage
+    ## Usage
 
 ### Import
 
@@ -113,6 +107,9 @@ quaternion.Multiply(other: Quaternion): void;
 // Checks whether this Quaternion and another are the same.
 quaternion.Equals(other: Quaternion): boolean;
 ```
+## Dependencies
+
+- [@xloxlolex/vector-math](https://www.npmjs.com/package/@xloxlolex/vector-math)
 ## Authors
 
 - [@gonzaloivan121 (xloxlolex)](https://www.github.com/gonzaloivan121)
