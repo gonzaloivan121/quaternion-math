@@ -76,7 +76,7 @@ export class Quaternion implements IQuaternion {
      * Returns the conjugate of this Quaternion.
      */
     public get conjugate(): Quaternion {
-        return new Quaternion(this.x, -this.y, -this.z, -this.w);
+        return new Quaternion(-this.x, -this.y, -this.z, this.w);
     }
 
     /**
@@ -84,13 +84,13 @@ export class Quaternion implements IQuaternion {
      */
     public get inverse(): Quaternion {
         let conj: Quaternion = this.conjugate;
-        let mag: number = this.magnitude;
+        let sqrMag: number = this.sqrMagnitude;
 
         return new Quaternion(
-            conj.x / mag,
-            conj.y / mag,
-            conj.z / mag,
-            conj.w / mag
+            conj.x / sqrMag,
+            conj.y / sqrMag,
+            conj.z / sqrMag,
+            conj.w / sqrMag
         );
     }
 
@@ -294,6 +294,17 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
+     * Divides two Quaternions (lhs / rhs).
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The quotient of the division between the two Quaternions
+     */
+    public static Divide(lhs: Quaternion, rhs: Quaternion): Quaternion {
+        const inverseRhs = rhs.inverse;
+        return Quaternion.Multiply(lhs, inverseRhs);
+    }
+
+    /**
      * Checks whether the lhs and the rhs Quaternions are the same.
      * @param lhs First Quaternion.
      * @param rhs Second Quaternion.
@@ -317,6 +328,15 @@ export class Quaternion implements IQuaternion {
         this.y = this.w * other.y + this.y * other.w + this.z * other.x - this.x * other.z;
         this.z = this.w * other.z + this.z * other.w + this.x * other.y - this.y * other.x;
         this.w = this.w * other.w - this.x * other.x - this.y * other.y - this.z * other.z;
+    }
+
+    /**
+     * Divides two Quaternions (this / other).
+     * @param other Second Quaternion.
+     */
+    public Divide(other: Quaternion): void {
+        const inverseOther = other.inverse;
+        this.Multiply(inverseOther);
     }
 
     /**

@@ -68,15 +68,15 @@ class Quaternion {
      * Returns the conjugate of this Quaternion.
      */
     get conjugate() {
-        return new Quaternion(this.x, -this.y, -this.z, -this.w);
+        return new Quaternion(-this.x, -this.y, -this.z, this.w);
     }
     /**
      * Returns the inverse of this Quaternion.
      */
     get inverse() {
         let conj = this.conjugate;
-        let mag = this.magnitude;
-        return new Quaternion(conj.x / mag, conj.y / mag, conj.z / mag, conj.w / mag);
+        let sqrMag = this.sqrMagnitude;
+        return new Quaternion(conj.x / sqrMag, conj.y / sqrMag, conj.z / sqrMag, conj.w / sqrMag);
     }
     /**
      * Euler angles representation of this Quaternion.
@@ -238,6 +238,16 @@ class Quaternion {
         return new Quaternion(lhs.w * rhs.x + lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y, lhs.w * rhs.y + lhs.y * rhs.w + lhs.z * rhs.x - lhs.x * rhs.z, lhs.w * rhs.z + lhs.z * rhs.w + lhs.x * rhs.y - lhs.y * rhs.x, lhs.w * rhs.w - lhs.x * rhs.x - lhs.y * rhs.y - lhs.z * rhs.z);
     }
     /**
+     * Divides two Quaternions (lhs / rhs).
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The quotient of the division between the two Quaternions
+     */
+    static Divide(lhs, rhs) {
+        const inverseRhs = rhs.inverse;
+        return Quaternion.Multiply(lhs, inverseRhs);
+    }
+    /**
      * Checks whether the lhs and the rhs Quaternions are the same.
      * @param lhs First Quaternion.
      * @param rhs Second Quaternion.
@@ -258,6 +268,14 @@ class Quaternion {
         this.y = this.w * other.y + this.y * other.w + this.z * other.x - this.x * other.z;
         this.z = this.w * other.z + this.z * other.w + this.x * other.y - this.y * other.x;
         this.w = this.w * other.w - this.x * other.x - this.y * other.y - this.z * other.z;
+    }
+    /**
+     * Divides two Quaternions (this / other).
+     * @param other Second Quaternion.
+     */
+    Divide(other) {
+        const inverseOther = other.inverse;
+        this.Multiply(inverseOther);
     }
     /**
      * Checks whether this Quaternion and another are the same.
