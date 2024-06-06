@@ -37,7 +37,7 @@ class Quaternion {
             this.w = w;
     }
     /**
-     * Shorthand for writing Quaternion(1, 1, 1, 1).
+     * Shorthand for writing Quaternion(0, 0, 0, 1).
      */
     static get identity() {
         return new Quaternion(0, 0, 0, 1);
@@ -53,25 +53,25 @@ class Quaternion {
         return Quaternion.identity;
     }
     /**
-     * Returns the length of this Quaternion
+     * Returns the length of this Quaternion.
      */
     get magnitude() {
         return Math.sqrt(Quaternion.Dot(this, this));
     }
     /**
-     * Returns the squared length of this Quaternion
+     * Returns the squared length of this Quaternion.
      */
     get sqrMagnitude() {
         return Math.sqrt(this.magnitude);
     }
     /**
-     * Returns the conjugate of this Quaternion
+     * Returns the conjugate of this Quaternion.
      */
     get conjugate() {
         return new Quaternion(this.x, -this.y, -this.z, -this.w);
     }
     /**
-     * Returns the inverse of this Quaternion
+     * Returns the inverse of this Quaternion.
      */
     get inverse() {
         let conj = this.conjugate;
@@ -79,7 +79,7 @@ class Quaternion {
         return new Quaternion(conj.x / mag, conj.y / mag, conj.z / mag, conj.w / mag);
     }
     /**
-     * Euler angles representation of this Quaternion
+     * Euler angles representation of this Quaternion.
      */
     get eulerAngles() {
         let t0 = 2 * (this.w * this.x + this.y * this.z);
@@ -95,26 +95,26 @@ class Quaternion {
         return new vector_math_1.Vector3(x, y, z);
     }
     /**
-     * Quaternion created from Euler angles
-     * @param v Euler angles Vector3
-     * @returns The Quaternion created from Euler angles
+     * Create a Quaternion from Euler angles.
+     * @param v Euler angles Vector3.
+     * @returns The Quaternion created from Euler angles.
      */
     static Euler(v) {
         return new Quaternion(Math.sin(v.z / 2) * Math.cos(v.y / 2) * Math.cos(v.x / 2) - Math.cos(v.z / 2) * Math.sin(v.y / 2) * Math.sin(v.x / 2), Math.cos(v.z / 2) * Math.sin(v.y / 2) * Math.cos(v.x / 2) + Math.sin(v.z / 2) * Math.cos(v.y / 2) * Math.sin(v.x / 2), Math.cos(v.z / 2) * Math.cos(v.y / 2) * Math.sin(v.x / 2) - Math.sin(v.z / 2) * Math.sin(v.y / 2) * Math.cos(v.x / 2), Math.cos(v.z / 2) * Math.cos(v.y / 2) * Math.cos(v.x / 2) + Math.sin(v.z / 2) * Math.sin(v.y / 2) * Math.sin(v.x / 2));
     }
     /**
-     * Normalizes a Quaternion
-     * @param q Quaternion to normalize
-     * @returns The normalized Quaternion
+     * Normalizes a Quaternion.
+     * @param q Quaternion to normalize.
+     * @returns The normalized Quaternion.
      */
     static Normalize(q) {
         return q.normalized;
     }
     /**
-     * Returns the angle in degrees from one Quaternion to another
-     * @param from Start rotation
-     * @param to End rotation
-     * @returns The angle in degrees
+     * Returns the angle in degrees from one Quaternion to another.
+     * @param from Start rotation.
+     * @param to End rotation.
+     * @returns The angle in degrees.
      */
     static Angle(from, to) {
         const dot = Quaternion.Dot(from, to);
@@ -125,9 +125,9 @@ class Quaternion {
     }
     /**
      * Returns a copy of a Quaternion with its magnitude clamped to maxLength.
-     * @param quaternion Quaternion to clamp
-     * @param maxLength length to clamp to
-     * @returns Quaternion with its magnitude clamped
+     * @param quaternion Quaternion to clamp.
+     * @param maxLength length to clamp to.
+     * @returns Quaternion with its magnitude clamped.
      */
     static ClampMagnitude(quaternion, maxLength) {
         const mag = quaternion.magnitude;
@@ -138,11 +138,11 @@ class Quaternion {
         return new Quaternion(quaternion.x * multiplier, quaternion.y * multiplier, quaternion.z * multiplier, quaternion.w * multiplier);
     }
     /**
-     * Rotates a Quaternion towards another with a max degree of maxDegreesDelta
-     * @param from Start value
-     * @param to End value
-     * @param maxDegreesDelta The maximum degrees that the rotation have
-     * @returns The rotated Quaternion
+     * Rotates a Quaternion towards another with a max degree of maxDegreesDelta.
+     * @param from Start value.
+     * @param to End value.
+     * @param maxDegreesDelta The maximum degrees that the rotation have.
+     * @returns The rotated Quaternion.
      */
     static RotateTowards(from, to, maxDegreesDelta) {
         let angle = this.Angle(from, to);
@@ -190,9 +190,10 @@ class Quaternion {
         return Quaternion.DoSlerp(a, b, t);
     }
     /**
-     * Rotates the point with a given rotation.
-     * @param rotation The rotation to rotate the point with
-     * @param point The point to rotate with the rotation
+     * Rotates a point with a given rotation.
+     * @param rotation The rotation to rotate the point with.
+     * @param point The point to rotate with the rotation.
+     * @returns The rotated point.
      */
     static RotatePoint(rotation, point) {
         let x = rotation.x * 2;
@@ -212,27 +213,35 @@ class Quaternion {
     }
     /**
      * The dot product between two Quaternions.
-     * @param a First
-     * @param b Second
+     * @param a First Quaternion.
+     * @param b Second Quaternion.
      * @returns The result of the dot product between two Quaternions.
      */
     static Dot(lhs, rhs) {
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
     }
     /**
-     * Combines rotations lhs and rhs
-     * @param lhs First Quaternion
-     * @param rhs Second Quaternion
-     * @returns The combined Quaternion between lhs and rhs
+     * Returns the length of a given Quaternion
+     * @param quaternion The Quaternion to calculate its magnitude
+     * @returns The magnitude of the given Quaternion.
+     */
+    static Magnitude(quaternion) {
+        return quaternion.magnitude;
+    }
+    /**
+     * Combines rotations lhs and rhs.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The combined Quaternion between lhs and rhs.
      */
     static Multiply(lhs, rhs) {
         return new Quaternion(lhs.w * rhs.x + lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y, lhs.w * rhs.y + lhs.y * rhs.w + lhs.z * rhs.x - lhs.x * rhs.z, lhs.w * rhs.z + lhs.z * rhs.w + lhs.x * rhs.y - lhs.y * rhs.x, lhs.w * rhs.w - lhs.x * rhs.x - lhs.y * rhs.y - lhs.z * rhs.z);
     }
     /**
-     * Checks whether the lhs and the rhs Quaternions are the same
-     * @param lhs First Quaternion
-     * @param rhs Second Quaternion
-     * @returns Whether or not the two Quaternions are the same
+     * Checks whether the lhs and the rhs Quaternions are the same.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns Whether or not the two Quaternions are the same.
      */
     static Equals(lhs, rhs) {
         return (lhs.x === rhs.x &&
@@ -241,8 +250,8 @@ class Quaternion {
             lhs.w === rhs.w);
     }
     /**
-     * Combines rotations between this Quaternion and another
-     * @param other Quaternion to combine with this Quaternion
+     * Combines rotations between this Quaternion and another.
+     * @param other Quaternion to combine with this Quaternion.
      */
     Multiply(other) {
         this.x = this.w * other.x + this.x * other.w + this.y * other.z - this.z * other.y;
@@ -251,9 +260,9 @@ class Quaternion {
         this.w = this.w * other.w - this.x * other.x - this.y * other.y - this.z * other.z;
     }
     /**
-     * Checks whether the this Quaternion and another are the same
-     * @param other Other Quaternion to check if it's the same with this Quaternion
-     * @returns Whether or not the two Quaternions are the same
+     * Checks whether this Quaternion and another are the same.
+     * @param other Other Quaternion to check if it's the same with this Quaternion.
+     * @returns Whether or not the two Quaternions are the same.
      */
     Equals(other) {
         return (this.x === other.x &&
