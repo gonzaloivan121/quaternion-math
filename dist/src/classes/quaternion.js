@@ -157,27 +157,42 @@ class Quaternion {
      * @param t Value used to interpolate between a and b.
      * @returns Interpolated value, equals to (b * one.inverse)**t * one.
      */
-    static Slerp(a, b, t) {
+    static Slerp(from, to, t) {
         if (t < 0)
-            return a;
+            return from;
         if (t > 1)
-            return b;
-        return Quaternion.DoSlerp(a, b, t);
+            return to;
+        return Quaternion.DoSlerp(from, to, t);
     }
     /**
      * Spherical Linear Interpolation between two Quaternions.
      * @param a Start value, returned when t = 0.
      * @param b End value, returned when t = 1.
      * @param t Value used to interpolate between a and b.
-     * @returns Interpolated value, equals to a + (b - a) * t.
+     * @returns Spherical Linear Interpolated value between two Quaternions by t.
      */
-    static DoSlerp(a, b, t) {
-        let q1 = Quaternion.Multiply(b, a.inverse);
-        let q2 = Quaternion.identity;
-        for (let i = 0; i < t; i += Number.MIN_VALUE) {
-            q2 = Quaternion.Multiply(q1, q1);
+    static DoSlerp(from, to, t) {
+        // Compute the dot product (cosine of the angle)
+        let dot = this.Dot(from, to);
+        // If the dot product is negative, slerp won't take the shorter path
+        // So we invert one quaternion to take the shorter path
+        if (dot < 0) {
+            to = new Quaternion(-to.x, -to.y, -to.z, -to.w);
+            dot = -dot;
         }
-        return Quaternion.Multiply(q2, a);
+        const DOT_THRESHOLD = 0.9995;
+        if (dot > DOT_THRESHOLD) {
+            // If the quaternions are very close, we use linear interpolation
+            const result = new Quaternion(from.x + t * (to.x - from.x), from.y + t * (to.y - from.y), from.z + t * (to.z - from.z), from.w + t * (to.w - from.w));
+            return result.normalized;
+        }
+        // Calculate the angle between the quaternions
+        const theta_0 = Math.acos(dot);
+        const theta = theta_0 * t;
+        // Compute the second quaternion orthogonal to the Quaternion "to"
+        const to_orthogonal = new Quaternion(to.x - from.x * dot, to.y - from.y * dot, to.z - from.z * dot, to.w - from.w * dot).normalized;
+        // Calculate the interpolated quaternion
+        return new Quaternion(from.x * Math.cos(theta) + to_orthogonal.x * Math.sin(theta), from.y * Math.cos(theta) + to_orthogonal.y * Math.sin(theta), from.z * Math.cos(theta) + to_orthogonal.z * Math.sin(theta), from.w * Math.cos(theta) + to_orthogonal.w * Math.sin(theta));
     }
     /**
      * Spherical Linear Interpolation between two Quaternions.
@@ -186,8 +201,8 @@ class Quaternion {
      * @param t Value used to interpolate between a and b.
      * @returns Interpolated value, equals to a + (b - a) * t.
      */
-    static SlerpUnclamped(a, b, t) {
-        return Quaternion.DoSlerp(a, b, t);
+    static SlerpUnclamped(from, to, t) {
+        return Quaternion.DoSlerp(from, to, t);
     }
     /**
      * Rotates a point with a given rotation.
