@@ -56,11 +56,11 @@ Quaternion.ClampMagnitude(quaternion: Quaternion, maxLength: number): Quaternion
 // Rotates a Quaternion towards another with a max degree of maxDegreesDelta.
 Quaternion.RotateTowards(from: Quaternion, to: Quaternion, maxDegreesDelta: number): Quaternion;
 
-// Spherical Linear Interpolation between two Quaternions. If t is lower than 0, return a. If t is greater than 1, return b.
-Quaternion.Slerp(a: Quaternion, b: Quaternion, t: number): Quaternion;
+// Spherical Linear Interpolation between two Quaternions. If t is lower than 0, return "from". If t is greater than 1, return "to".
+Quaternion.Slerp(from: Quaternion, to: Quaternion, t: number): Quaternion;
 
 // Spherical Linear Interpolation between two Quaternions.
-Quaternion.SlerpUnclamped(a: Quaternion, b: Quaternion, t: number): Quaternion;
+Quaternion.SlerpUnclamped(from: Quaternion, to: Quaternion, t: number): Quaternion;
 
 // Rotates a point with a given rotation.
 Quaternion.RotatePoint(rotation: Quaternion, point: Vector3): Vector3;
@@ -68,11 +68,20 @@ Quaternion.RotatePoint(rotation: Quaternion, point: Vector3): Vector3;
 // The dot product between two Quaternions.
 Quaternion.Dot(lhs: Quaternion, rhs: Quaternion): number;
 
-// Returns the length of a given Quaternion
+// Returns the length of a given Quaternion.
 Quaternion.Magnitude(quaternion: Quaternion): number;
+
+// Add two Quaternions.
+Quaternion.Add(lhs: Quaternion, rhs: Quaternion): Quaternion;
+
+// Subtract two Quaternions.
+Quaternion.Subtract(lhs: Quaternion, rhs: Quaternion): Quaternion;
 
 // Combines rotations lhs and rhs.
 Quaternion.Multiply(lhs: Quaternion, rhs: Quaternion): Quaternion;
+
+// Divides two Quaternions (lhs / rhs).
+Quaternion.Divide(lhs: Quaternion, rhs: Quaternion): Quaternion;
 
 // Checks whether the lhs and the rhs Quaternions are the same.
 Quaternion.Equals(lhs: Quaternion, rhs: Quaternion): Quaternion;
@@ -101,8 +110,17 @@ quaternion.eulerAngles; // Returns the Euler angles representation of this Quate
 ```typescript
 var quaternion = new Quaternion();
 
+// Add a Quaternion to this Quaternion.
+quaternion.Add(other: Quaternion): void;
+
+// Subtract a Quaternion from this Quaternion.
+quaternion.Subtract(other: Quaternion): void;
+
 // Combines rotations between this Quaternion and another.
 quaternion.Multiply(other: Quaternion): void;
+
+// Divides two Quaternions (this / other).
+quaternion.Divide(other: Quaternion): void;
 
 // Checks whether this Quaternion and another are the same.
 quaternion.Equals(other: Quaternion): boolean;
