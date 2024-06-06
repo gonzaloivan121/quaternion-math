@@ -1,0 +1,35 @@
+{
+    "name": "@xloxlolex/quaternion-math",
+    "version": "1.0.0",
+    "description": "Fast and easy-to-use Quaternion Math library powered by TypeScript",
+    "main": "dist/index.js",
+    "types": "dist/index.d.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gonzaloivan121/quaternion-math.git"
+    },
+    "keywords": [
+        "quaternion",
+        "quaternions",
+        "math",
+        "typescript",
+        "ts"
+    ],
+    "author": "Gonzalo Iván Chaparro Barese",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/gonzaloivan121/quaternion-math/issues"
+    },
+    "homepage": "https://github.com/gonzaloivan121/quaternion-math#readme",
+    "devDependencies": {
+        "@types/node": "^20.14.2",
+        "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "@xloxlolex/vector-math": "^1.1.1"
+    }
+}
