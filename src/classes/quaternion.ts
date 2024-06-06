@@ -279,6 +279,36 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
+     * Add two Quaternions.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The result of the addition between the two Quaternions.
+     */
+    public static Add(lhs: Quaternion, rhs: Quaternion): Quaternion {
+        return new Quaternion(
+            lhs.x + rhs.x,
+            lhs.y + rhs.y,
+            lhs.z + rhs.z,
+            lhs.w + rhs.w
+        );
+    }
+
+    /**
+     * Subtract two Quaternions.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The result of the subtraction between the two Quaternions.
+     */
+    public static Subtract(lhs: Quaternion, rhs: Quaternion): Quaternion {
+        return new Quaternion(
+            lhs.x - rhs.x,
+            lhs.y - rhs.y,
+            lhs.z - rhs.z,
+            lhs.w - rhs.w
+        );
+    }
+
+    /**
      * Combines rotations lhs and rhs.
      * @param lhs First Quaternion.
      * @param rhs Second Quaternion.
@@ -317,6 +347,28 @@ export class Quaternion implements IQuaternion {
             lhs.z === rhs.z &&
             lhs.w === rhs.w
         );
+    }
+
+    /**
+     * Add a Quaternion to this Quaternion.
+     * @param other The Quaternion to add to this Quaternion.
+     */
+    public Add(other: Quaternion): void {
+        this.x += other.x;
+        this.y += other.y;
+        this.z += other.z;
+        this.w += other.w;
+    }
+
+    /**
+     * Subtract a Quaternion from this Quaternion
+     * @param other The Quaternion to subtract from this Quaternion.
+     */
+    public Subtract(other: Quaternion): void {
+        this.x -= other.x;
+        this.y -= other.y;
+        this.z -= other.z;
+        this.w -= other.w;
     }
 
     /**

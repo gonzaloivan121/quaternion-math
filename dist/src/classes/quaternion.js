@@ -229,6 +229,24 @@ class Quaternion {
         return quaternion.magnitude;
     }
     /**
+     * Add two Quaternions.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The result of the addition between the two Quaternions.
+     */
+    static Add(lhs, rhs) {
+        return new Quaternion(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w);
+    }
+    /**
+     * Subtract two Quaternions.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The result of the subtraction between the two Quaternions.
+     */
+    static Subtract(lhs, rhs) {
+        return new Quaternion(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w);
+    }
+    /**
      * Combines rotations lhs and rhs.
      * @param lhs First Quaternion.
      * @param rhs Second Quaternion.
@@ -258,6 +276,26 @@ class Quaternion {
             lhs.y === rhs.y &&
             lhs.z === rhs.z &&
             lhs.w === rhs.w);
+    }
+    /**
+     * Add a Quaternion to this Quaternion.
+     * @param other The Quaternion to add to this Quaternion.
+     */
+    Add(other) {
+        this.x += other.x;
+        this.y += other.y;
+        this.z += other.z;
+        this.w += other.w;
+    }
+    /**
+     * Subtract a Quaternion from this Quaternion
+     * @param other The Quaternion to subtract from this Quaternion.
+     */
+    Subtract(other) {
+        this.x -= other.x;
+        this.y -= other.y;
+        this.z -= other.z;
+        this.w -= other.w;
     }
     /**
      * Combines rotations between this Quaternion and another.
