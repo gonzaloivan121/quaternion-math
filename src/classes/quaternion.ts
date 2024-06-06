@@ -34,7 +34,7 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Shorthand for writing Quaternion(1, 1, 1, 1).
+     * Shorthand for writing Quaternion(0, 0, 0, 1).
      */
     public static get identity(): Quaternion {
         return new Quaternion(0, 0, 0, 1);
@@ -59,28 +59,28 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Returns the length of this Quaternion
+     * Returns the length of this Quaternion.
      */
     public get magnitude(): number {
         return Math.sqrt(Quaternion.Dot(this, this));
     }
 
     /**
-     * Returns the squared length of this Quaternion
+     * Returns the squared length of this Quaternion.
      */
     public get sqrMagnitude(): number {
         return Math.sqrt(this.magnitude);
     }
 
     /**
-     * Returns the conjugate of this Quaternion
+     * Returns the conjugate of this Quaternion.
      */
     public get conjugate(): Quaternion {
         return new Quaternion(this.x, -this.y, -this.z, -this.w);
     }
 
     /**
-     * Returns the inverse of this Quaternion
+     * Returns the inverse of this Quaternion.
      */
     public get inverse(): Quaternion {
         let conj: Quaternion = this.conjugate;
@@ -95,7 +95,7 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Euler angles representation of this Quaternion
+     * Euler angles representation of this Quaternion.
      */
     public get eulerAngles(): Vector3 {
         let t0 = 2 * (this.w * this.x + this.y * this.z);
@@ -115,9 +115,9 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Quaternion created from Euler angles
-     * @param v Euler angles Vector3
-     * @returns The Quaternion created from Euler angles
+     * Create a Quaternion from Euler angles.
+     * @param v Euler angles Vector3.
+     * @returns The Quaternion created from Euler angles.
      */
     public static Euler(v: Vector3): Quaternion {
         return new Quaternion(
@@ -129,19 +129,19 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Normalizes a Quaternion
-     * @param q Quaternion to normalize
-     * @returns The normalized Quaternion
+     * Normalizes a Quaternion.
+     * @param q Quaternion to normalize.
+     * @returns The normalized Quaternion.
      */
     public static Normalize(q: Quaternion): Quaternion {
         return q.normalized;
     }
 
     /**
-     * Returns the angle in degrees from one Quaternion to another
-     * @param from Start rotation
-     * @param to End rotation
-     * @returns The angle in degrees
+     * Returns the angle in degrees from one Quaternion to another.
+     * @param from Start rotation.
+     * @param to End rotation.
+     * @returns The angle in degrees.
      */
     public static Angle(from: Quaternion, to: Quaternion): number {
         const dot = Quaternion.Dot(from, to);
@@ -154,9 +154,9 @@ export class Quaternion implements IQuaternion {
 
     /**
      * Returns a copy of a Quaternion with its magnitude clamped to maxLength.
-     * @param quaternion Quaternion to clamp
-     * @param maxLength length to clamp to
-     * @returns Quaternion with its magnitude clamped
+     * @param quaternion Quaternion to clamp.
+     * @param maxLength length to clamp to.
+     * @returns Quaternion with its magnitude clamped.
      */
     public static ClampMagnitude(quaternion: Quaternion, maxLength: number): Quaternion {
         const mag: number = quaternion.magnitude;
@@ -175,11 +175,11 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Rotates a Quaternion towards another with a max degree of maxDegreesDelta
-     * @param from Start value
-     * @param to End value
-     * @param maxDegreesDelta The maximum degrees that the rotation have
-     * @returns The rotated Quaternion
+     * Rotates a Quaternion towards another with a max degree of maxDegreesDelta.
+     * @param from Start value.
+     * @param to End value.
+     * @param maxDegreesDelta The maximum degrees that the rotation have.
+     * @returns The rotated Quaternion.
      */
     public static RotateTowards(from: Quaternion, to: Quaternion, maxDegreesDelta: number): Quaternion {
         let angle: number = this.Angle(from, to);
@@ -231,9 +231,10 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Rotates the point with a given rotation.
-     * @param rotation The rotation to rotate the point with
-     * @param point The point to rotate with the rotation
+     * Rotates a point with a given rotation.
+     * @param rotation The rotation to rotate the point with.
+     * @param point The point to rotate with the rotation.
+     * @returns The rotated point.
      */
     public static RotatePoint(rotation: Quaternion, point: Vector3): Vector3 {
         let x: number = rotation.x * 2;
@@ -260,8 +261,8 @@ export class Quaternion implements IQuaternion {
 
     /**
      * The dot product between two Quaternions.
-     * @param a First
-     * @param b Second
+     * @param a First Quaternion.
+     * @param b Second Quaternion.
      * @returns The result of the dot product between two Quaternions.
      */
     public static Dot(lhs: Quaternion, rhs: Quaternion): number {
@@ -269,10 +270,19 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Combines rotations lhs and rhs
-     * @param lhs First Quaternion
-     * @param rhs Second Quaternion
-     * @returns The combined Quaternion between lhs and rhs
+     * Returns the length of a given Quaternion
+     * @param quaternion The Quaternion to calculate its magnitude
+     * @returns The magnitude of the given Quaternion.
+     */
+    public static Magnitude(quaternion: Quaternion): number {
+        return quaternion.magnitude;
+    }
+
+    /**
+     * Combines rotations lhs and rhs.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns The combined Quaternion between lhs and rhs.
      */
     public static Multiply(lhs: Quaternion, rhs: Quaternion): Quaternion {
         return new Quaternion(
@@ -284,10 +294,10 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Checks whether the lhs and the rhs Quaternions are the same
-     * @param lhs First Quaternion
-     * @param rhs Second Quaternion
-     * @returns Whether or not the two Quaternions are the same
+     * Checks whether the lhs and the rhs Quaternions are the same.
+     * @param lhs First Quaternion.
+     * @param rhs Second Quaternion.
+     * @returns Whether or not the two Quaternions are the same.
      */
     public static Equals(lhs: Quaternion, rhs: Quaternion): boolean {
         return (
@@ -299,8 +309,8 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Combines rotations between this Quaternion and another
-     * @param other Quaternion to combine with this Quaternion
+     * Combines rotations between this Quaternion and another.
+     * @param other Quaternion to combine with this Quaternion.
      */
     public Multiply(other: Quaternion): void {
         this.x = this.w * other.x + this.x * other.w + this.y * other.z - this.z * other.y;
@@ -310,9 +320,9 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Checks whether the this Quaternion and another are the same
-     * @param other Other Quaternion to check if it's the same with this Quaternion
-     * @returns Whether or not the two Quaternions are the same
+     * Checks whether this Quaternion and another are the same.
+     * @param other Other Quaternion to check if it's the same with this Quaternion.
+     * @returns Whether or not the two Quaternions are the same.
      */
     public Equals(other: Quaternion): boolean {
         return (
