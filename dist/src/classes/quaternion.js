@@ -75,8 +75,8 @@ class Quaternion {
      */
     get inverse() {
         let conj = this.conjugate;
-        let sqrMag = this.sqrMagnitude;
-        return new Quaternion(conj.x / sqrMag, conj.y / sqrMag, conj.z / sqrMag, conj.w / sqrMag);
+        let mag2 = this.magnitude ** 2;
+        return new Quaternion(conj.x / mag2, conj.y / mag2, conj.z / mag2, conj.w / mag2);
     }
     /**
      * Euler angles representation of this Quaternion.

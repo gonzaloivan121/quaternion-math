@@ -84,13 +84,13 @@ export class Quaternion implements IQuaternion {
      */
     public get inverse(): Quaternion {
         let conj: Quaternion = this.conjugate;
-        let sqrMag: number = this.sqrMagnitude;
+        let mag2: number = this.magnitude ** 2;
 
         return new Quaternion(
-            conj.x / sqrMag,
-            conj.y / sqrMag,
-            conj.z / sqrMag,
-            conj.w / sqrMag
+            conj.x / mag2,
+            conj.y / mag2,
+            conj.z / mag2,
+            conj.w / mag2
         );
     }
 
