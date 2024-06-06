@@ -3,9 +3,7 @@
 
 Fast and easy-to-use Quaternion Math library powered by TypeScript
 
-
 ![Logo](https://socialify.git.ci/gonzaloivan121/quaternion-math/image?description=1&descriptionEditable=Fast%20and%20easy-to-use%20Quaternion%20Math%20library%20powered%20by%20TypeScript&font=Source%20Code%20Pro&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Auto)
-
 
 ## Installation
 
@@ -16,6 +14,7 @@ Install @xloxlolex/quaternion-math with npm
   cd my-project
   npm install @xloxlolex/quaternion-math
 ```
+
 ## Usage
 
 ### Import
@@ -125,20 +124,19 @@ quaternion.Divide(other: Quaternion): void;
 // Checks whether this Quaternion and another are the same.
 quaternion.Equals(other: Quaternion): boolean;
 ```
+
 ## Dependencies
 
 - [@xloxlolex/vector-math](https://www.npmjs.com/package/@xloxlolex/vector-math)
+
 ## Authors
 
 - [@gonzaloivan121 (xloxlolex)](https://www.github.com/gonzaloivan121)
-
 
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-
 ## Support
 
 For support, email chaparro.gonzaloivan@gmail.com.
-
