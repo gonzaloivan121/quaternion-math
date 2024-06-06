@@ -43,7 +43,7 @@ class Quaternion {
         return new Quaternion(0, 0, 0, 1);
     }
     /**
-     * Returns this Quaternion with a magnitude of 1 (Read Only).
+     * Returns this Quaternion with a magnitude of 1.
      */
     get normalized() {
         const mag = this.magnitude;
@@ -155,7 +155,7 @@ class Quaternion {
      * @param a Start value, returned when t = 0.
      * @param b End value, returned when t = 1.
      * @param t Value used to interpolate between a and b.
-     * @returns Interpolated value, equals to (b * one.inverse)**t * one.
+     * @returns Spherical Linear Interpolated value between two Quaternions by t.
      */
     static Slerp(from, to, t) {
         if (t < 0)
@@ -199,7 +199,7 @@ class Quaternion {
      * @param a Start value, returned when t = 0.
      * @param b End value, returned when t = 1.
      * @param t Value used to interpolate between a and b.
-     * @returns Interpolated value, equals to a + (b - a) * t.
+     * @returns Spherical Linear Interpolated value between two Quaternions by t.
      */
     static SlerpUnclamped(from, to, t) {
         return Quaternion.DoSlerp(from, to, t);
@@ -236,8 +236,8 @@ class Quaternion {
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
     }
     /**
-     * Returns the length of a given Quaternion
-     * @param quaternion The Quaternion to calculate its magnitude
+     * Returns the length of a given Quaternion.
+     * @param quaternion The Quaternion to calculate its magnitude.
      * @returns The magnitude of the given Quaternion.
      */
     static Magnitude(quaternion) {
@@ -274,7 +274,7 @@ class Quaternion {
      * Divides two Quaternions (lhs / rhs).
      * @param lhs First Quaternion.
      * @param rhs Second Quaternion.
-     * @returns The quotient of the division between the two Quaternions
+     * @returns The quotient of the division between the two Quaternions.
      */
     static Divide(lhs, rhs) {
         const inverseRhs = rhs.inverse;
@@ -303,7 +303,7 @@ class Quaternion {
         this.w += other.w;
     }
     /**
-     * Subtract a Quaternion from this Quaternion
+     * Subtract a Quaternion from this Quaternion.
      * @param other The Quaternion to subtract from this Quaternion.
      */
     Subtract(other) {

@@ -41,7 +41,7 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Returns this Quaternion with a magnitude of 1 (Read Only).
+     * Returns this Quaternion with a magnitude of 1.
      */
     public get normalized(): Quaternion {
         const mag = this.magnitude;
@@ -192,7 +192,7 @@ export class Quaternion implements IQuaternion {
      * @param a Start value, returned when t = 0.
      * @param b End value, returned when t = 1.
      * @param t Value used to interpolate between a and b.
-     * @returns Interpolated value, equals to (b * one.inverse)**t * one.
+     * @returns Spherical Linear Interpolated value between two Quaternions by t.
      */
     public static Slerp(from: Quaternion, to: Quaternion, t: number): Quaternion {
         if (t < 0) return from;
@@ -258,7 +258,7 @@ export class Quaternion implements IQuaternion {
      * @param a Start value, returned when t = 0.
      * @param b End value, returned when t = 1.
      * @param t Value used to interpolate between a and b.
-     * @returns Interpolated value, equals to a + (b - a) * t.
+     * @returns Spherical Linear Interpolated value between two Quaternions by t.
      */
     public static SlerpUnclamped(from: Quaternion, to: Quaternion, t: number): Quaternion {
         return Quaternion.DoSlerp(from, to, t);
@@ -304,8 +304,8 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Returns the length of a given Quaternion
-     * @param quaternion The Quaternion to calculate its magnitude
+     * Returns the length of a given Quaternion.
+     * @param quaternion The Quaternion to calculate its magnitude.
      * @returns The magnitude of the given Quaternion.
      */
     public static Magnitude(quaternion: Quaternion): number {
@@ -361,7 +361,7 @@ export class Quaternion implements IQuaternion {
      * Divides two Quaternions (lhs / rhs).
      * @param lhs First Quaternion.
      * @param rhs Second Quaternion.
-     * @returns The quotient of the division between the two Quaternions
+     * @returns The quotient of the division between the two Quaternions.
      */
     public static Divide(lhs: Quaternion, rhs: Quaternion): Quaternion {
         const inverseRhs = rhs.inverse;
@@ -395,7 +395,7 @@ export class Quaternion implements IQuaternion {
     }
 
     /**
-     * Subtract a Quaternion from this Quaternion
+     * Subtract a Quaternion from this Quaternion.
      * @param other The Quaternion to subtract from this Quaternion.
      */
     public Subtract(other: Quaternion): void {
