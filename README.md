@@ -16,7 +16,7 @@ Install @xloxlolex/quaternion-math with npm
   cd my-project
   npm install @xloxlolex/quaternion-math
 ```
-    ## Usage
+## Usage
 
 ### Import
 
